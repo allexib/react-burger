@@ -2,16 +2,26 @@ import React from 'react';
 import restaurants from '../sample-restaurants';
 
 class Landing extends React.Component {
-    state={
-        display:false,
-        title:'',
-        url:''
+    state = {
+        display: false,
+        title: '',
+        url: ''
     };
 
-    displayList=()=>{
-        console.log('click');
-        console.log(this);
-    }
+    displayList = () => {
+        const {display} = this.state;
+        this.setState({display: !display});
+    };
+
+    getTitle = restaurant => {
+        console.log(restaurant)
+        const {title, url} = restaurant;
+        this.setState({title, url, display: false})
+    };
+
+    gotToRestaurant = () => {
+        console.log('go to');
+    };
 
     render() {
         return (
@@ -22,21 +32,32 @@ class Landing extends React.Component {
                         onClick={this.displayList}
                         className='restaurant_select_top-header font-effect-outline'
                     >
-                        Выбери ресторан
+                        {this.state.title ? this.state.title : 'Выбери ресторан'}
                     </div>
                     <div className='arrow_picker'>
                         <div className='arrow_picker-up'></div>
                         <div className='arrow_picker-down'></div>
                     </div>
                 </div>
-                <div className='restaurant_select_bottom'>
-                    <ul>
-                        {restaurants.map(restaurant => {
-                            return <li key={restaurant.id}>{restaurant.title}</li> ;
-                        })}
-                    </ul>
-                </div>
-                <button>Перейти в ресторан</button>
+                {this.state.display ? (
+                    <div className='restaurant_select_bottom'>
+                        <ul>
+                            {restaurants.map(restaurant => {
+                                return (
+                                    <li
+                                        onClick={() => this.getTitle(restaurant)}
+                                        key={restaurant.id}
+                                    >{restaurant.title}
+                                    </li>
+                                );
+                            })}
+                        </ul>
+                    </div>
+                ) : null}
+
+                {this.state.title && !this.state.display ? (
+                    <button onClick={this.gotToRestaurant}>Перейти в ресторан</button>
+                ) : null}
             </div>
         );
     }
