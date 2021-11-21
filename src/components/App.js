@@ -4,12 +4,26 @@ import Order from './Order';
 import MenuAdmin from './MenuAdmin';
 import Burger from './Burger';
 import sampleBurgers from '../sample-burgers';
+import base from '../Base';
 
 class App extends React.Component {
     state = {
         burgers: {},
         order: {}
     };
+
+    componentDidMount() {
+        const {params} = this.props.match;
+        this.ref = base.syncState(`${params.restaurntId}/burgers`, {
+            context: this,
+            state: 'burgers'
+        })
+
+    }
+
+    componentWillUnmount() {
+        base.removeBinding(this.ref);
+    }
 
     addBurger = burger => {
         // 1. Делаем копию объекта state
@@ -26,11 +40,11 @@ class App extends React.Component {
 
     addToOrder = key => {
         // 1. Делаем копию объекта state
-        const order = { ...this.state.order };
+        const order = {...this.state.order};
         // 2. Добавить ключ к заказу со знач-ем 1, либо обновить текущ. знач.
         order[key] = order[key] + 1 || 1;
         // 3. Записать наш новый объект order в state
-        this.setState({ order });
+        this.setState({order});
     };
 
     render() {
@@ -49,7 +63,7 @@ class App extends React.Component {
                         })}
                     </ul>
                 </div>
-                <Order/>
+                <Order burgers={this.state.burgers} order={this.state.order}/>
                 <MenuAdmin
                     addBurger={this.addBurger}
                     loadSampleBurgers={this.loadSampleBurgers}

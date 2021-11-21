@@ -16,7 +16,7 @@ class Burger extends React.Component {
             <div className='burger-details'>
                 <h3 className='burger-name'>
                     {name}
-                    <span className='price'>{price} ₽ </span>
+                    <span className='price'>{price} Р </span>
                 </h3>
                 <p>{desc}</p>
                 <button
