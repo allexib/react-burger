@@ -4,7 +4,7 @@
   exit
 */
 
-.order-enter 
+.order-enter
   transition: 0.5s;
   transform: translateX(-120%);
   max-height: 0;
@@ -13,7 +13,8 @@
     max-height: 60px;
     padding: 2rem 0 !important;
 
-.order-exit 
+
+.order-exit
   transition: 0.5s;
   transform: translateX(0);
   &.order-exit-active
@@ -34,3 +35,13 @@
   bottom: 0;
   &.count-exit-active
     transform: translateY(-100%);
+
+//.order-enter
+//  background: red;
+//  transition: 5s;
+//  transform: translateX(-120%);
+//  &.order-enter-active
+//    background: yellow;
+//    transform: translateX(0);
+
+
