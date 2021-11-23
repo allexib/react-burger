@@ -1,17 +1,23 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 
 class AddBurgerForm extends React.Component {
 
-    nameRef=React.createRef();
-    priceRef=React.createRef();
-    statusRef=React.createRef();
-    descRef=React.createRef();
-    imageRef=React.createRef();
+    static propTypes = {
+        addBurger: PropTypes.func
+    };
 
-    createBurger=(event)=>{
+    nameRef = React.createRef();
+    priceRef = React.createRef();
+    statusRef = React.createRef();
+    descRef = React.createRef();
+    imageRef = React.createRef();
+
+    createBurger = (event) => {
         event.preventDefault();
         //console.log('add burger',this.nameRef.current.value);
-        const burger={
+        const burger = {
             name: this.nameRef.current.value,
             price: parseFloat(this.priceRef.current.value || 0),
             status: this.statusRef.current.value,
@@ -21,6 +27,7 @@ class AddBurgerForm extends React.Component {
         this.props.addBurger(burger);
         event.currentTarget.reset();
     };
+
     render() {
         return (
             <form className='burger-edit' onSubmit={this.createBurger}>
@@ -30,7 +37,7 @@ class AddBurgerForm extends React.Component {
                     <option value='available'>Доступно</option>
                     <option value='unavailable'>Убрать из меню</option>
                 </select>
-                <textarea ref={this.descRef} name='desc'  placeholder='Desc' />
+                <textarea ref={this.descRef} name='desc' placeholder='Desc'/>
                 <input ref={this.imageRef} name='image' type='text' placeholder='Image' autoComplete='off'/>
                 <button type='submit'>+ Добавить в меню</button>
             </form>

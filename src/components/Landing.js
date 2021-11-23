@@ -1,7 +1,13 @@
 import React from 'react';
 import restaurants from '../sample-restaurants';
+import PropTypes from 'prop-types';
 
 class Landing extends React.Component {
+
+    static propTypes = {
+        history: PropTypes.object
+    };
+
     state = {
         display: false,
         title: '',
@@ -21,7 +27,7 @@ class Landing extends React.Component {
 
     gotToRestaurant = () => {
         //console.log('go to');
-        const {url}=this.state;
+        const {url} = this.state;
         //console.log(url);
         this.props.history.push(`/restaurant/${url}`)
     };
