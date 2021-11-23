@@ -11,7 +11,7 @@ class App extends React.Component {
 
     static propTypes = {
         match: PropTypes.object
-    }
+    };
 
     state = {
         burgers: {},
@@ -26,7 +26,6 @@ class App extends React.Component {
         if (localStorageRef) {
             this.setState({order: JSON.parse(localStorageRef)});
         }
-
 
         this.ref = base.syncState(`${params.restaurantId}/burgers`, {
             context: this,
